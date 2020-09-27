@@ -5,10 +5,7 @@
     <div
       v-if="!$slots.dot"
       class="el-timeline-item__node"
-      :class="[
-        `el-timeline-item__node--${size || ''}`,
-        `el-timeline-item__node--${type || ''}`
-      ]"
+      :class="[`el-timeline-item__node--${size || ''}`, `el-timeline-item__node--${type || ''}`]"
       :style="{
         backgroundColor: color
       }"
@@ -20,10 +17,7 @@
     </div>
 
     <div class="el-timeline-item__wrapper">
-      <div
-        v-if="!hideTimestamp && placement === 'top'"
-        class="el-timeline-item__timestamp is-top"
-      >
+      <div v-if="!hideTimestamp && placement === 'top'" class="el-timeline-item__timestamp is-top">
         {{ timestamp }}
       </div>
 

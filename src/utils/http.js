@@ -31,12 +31,12 @@ const service = axios.create({
   ]
 });
 service.interceptors.request.use(
-  config => {
-    let token = window.sessionStorage.getItem("token");
+  (config) => {
+    const token = window.sessionStorage.getItem("token");
     config.headers.token = token;
     return config;
   },
-  error => {
+  (error) => {
     // 错误抛到业务代码
     error.data = {};
     error.data.msg = "服务器异常，请联系管理员！";
@@ -45,7 +45,7 @@ service.interceptors.request.use(
 );
 
 // 根据不同的状态码，生成不同的提示信息
-const showStatus = status => {
+const showStatus = (status) => {
   let message = "";
   // 这一坨代码可以使用策略模式进行优化
   switch (status) {
@@ -90,8 +90,8 @@ const showStatus = status => {
 
 // 响应拦截器
 service.interceptors.response.use(
-  response => {
-    const status = response.status;
+  (response) => {
+    const { status } = response;
     let msg = "";
     if (status < 200 || status >= 300) {
       // 处理http错误，抛到业务代码
@@ -104,7 +104,7 @@ service.interceptors.response.use(
     }
     return response;
   },
-  error => {
+  (error) => {
     // 错误抛到业务代码
     error.data = {};
     error.data.msg = "请求超时或服务器异常，请检查网络或联系管理员！";

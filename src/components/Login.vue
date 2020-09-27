@@ -15,10 +15,7 @@
       >
         <!--用户名-->
         <el-form-item prop="username">
-          <el-input
-            v-model="loginForm.username"
-            prefix-icon="el-icon-user"
-          ></el-input>
+          <el-input v-model="loginForm.username" prefix-icon="el-icon-user"></el-input>
         </el-form-item>
         <!--密码-->
         <el-form-item prop="password">
@@ -44,19 +41,19 @@ export default {
   components: {},
   data() {
     return {
-      //登录表单的数据绑定对象
+      // 登录表单的数据绑定对象
       loginForm: {
         username: "admin",
         password: "123456"
       },
-      //表单的验证规则对象
+      // 表单的验证规则对象
       loginFormRules: {
-        //验证用户名是否合法
+        // 验证用户名是否合法
         username: [
           { required: true, message: "请输入登录名称", trigger: "blur" },
           { min: 3, max: 10, message: "长度在 3 到 10 个字符", trigger: "blur" }
         ],
-        //验证密码是否合法
+        // 验证密码是否合法
         password: [
           { required: true, message: "请输入登录密码", trigger: "blur" },
           { min: 6, max: 15, message: "长度在 6 到 15 个字符", trigger: "blur" }
@@ -65,12 +62,12 @@ export default {
     };
   },
   methods: {
-    //点击重置按钮，重置登录表单
-    resetLoginForm: function() {
+    // 点击重置按钮，重置登录表单
+    resetLoginForm() {
       this.$refs.loginFormRef.resetFields();
     },
     login() {
-      this.$refs.loginFormRef.validate(async valid => {
+      this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return;
         const { data: res } = await this.$http.post("login", this.loginForm);
         if (res.meta.status != 200) {

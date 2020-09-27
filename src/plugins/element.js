@@ -1,5 +1,5 @@
 import Vue from "vue";
-//导入所需组件
+// 导入所需组件
 import {
   Button,
   Form,
@@ -80,6 +80,6 @@ Vue.use(Step);
 Vue.use(CheckboxGroup);
 Vue.use(Checkbox);
 Vue.use(Upload);
-//挂载到Vue原型对象上，这样可以通过this访问$xxx
+// 挂载到Vue原型对象上，这样可以通过this访问$xxx
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox.confirm;

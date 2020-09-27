@@ -1,4 +1,5 @@
 import Vue from "vue";
+import axios from "axios";
 import router from "./router";
 import store from "./store";
 import App from "./App.vue";
@@ -6,7 +7,6 @@ import "./plugins/element.js";
 import "./assets/css/reset.css";
 import "./assets/css/global.css";
 import "element-ui/lib/theme-chalk/index.css";
-import axios from "axios";
 /* axios.create({
   baseURL: "http://timemeetyou.com:8889/api/private/v1/",
   // 跨域请求时是否需要使用凭证
@@ -23,7 +23,11 @@ import axios from "axios";
     }
   }
 }); */
-axios.defaults.baseURL = "http://timemeetyou.com:8889/api/private/v1/";
+axios.defaults.baseURL = "https://www.liulongbin.top:8888/api/private/v1/";
+axios.interceptors.request.use((config) => {
+  config.headers.Authorization = window.sessionStorage.getItem("token");
+  return config;
+});
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
@@ -32,17 +36,17 @@ Vue.filter("dateFormat", function(originVal) {
   const dt = new Date(originVal);
 
   const y = dt.getFullYear();
-  const m = (dt.getMonth() + 1 + "").padStart(2, "0");
-  const d = (dt.getDate() + "").padStart(2, "0");
-  //padStart(2,'0') 意思是不足两位自动补0
-  const hh = (dt.getHours() + "").padStart(2, "0");
-  const mm = (dt.getMinutes() + "").padStart(2, "0");
-  const ss = (dt.getSeconds() + "").padStart(2, "0");
+  const m = `${dt.getMonth() + 1}`.padStart(2, "0");
+  const d = `${dt.getDate()}`.padStart(2, "0");
+  // padStart(2,'0') 意思是不足两位自动补0
+  const hh = `${dt.getHours()}`.padStart(2, "0");
+  const mm = `${dt.getMinutes()}`.padStart(2, "0");
+  const ss = `${dt.getSeconds()}`.padStart(2, "0");
   return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
 });
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount("#app");
