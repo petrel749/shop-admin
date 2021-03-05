@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
+      // 被分配角色的用户信息
       userInfo: {},
       rolesList: [],
       selectedRoleId: ""
@@ -46,7 +47,9 @@ export default {
       if (res.meta.status !== 200) this.$message.error("获取角色列表失败");
       this.rolesList = res.data;
     },
-    setDialogClosed() {},
+    setDialogClosed() {
+      this.dialogVisible = false;
+    },
     async allocateRole() {
       if (!this.selectedRoleId) {
         this.$message.error("请选择一个角色");
@@ -54,17 +57,15 @@ export default {
       let { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, {
         rid: this.selectedRoleId
       });
-      res.meta.status !== 200
-        ? this.$message.error("分配角色失败")
-        : this.$message.success("分配角色成功");
+      if (res.meta.status !== 200) {
+        return this.$message.error("分配角色失败");
+      }
+      this.$message.success("分配角色成功");
       this.dialogVisible = false;
-      this.$parent.getUserList();
+      this.$emit("getUserList");
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
-p {
-}
-</style>
+<style lang="scss" scoped></style>

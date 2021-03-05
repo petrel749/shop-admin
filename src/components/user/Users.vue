@@ -42,7 +42,7 @@
                 type="primary"
                 icon="el-icon-edit"
                 size="small"
-                @click="showEditDialog(scope.row.id)"
+                @click="setEditUserId(scope.row.id)"
               ></el-button>
             </el-tooltip>
             <el-tooltip effect="dark" content="删除信息" :enterable="false">
@@ -79,7 +79,7 @@
       <!-- 添加角色的对话框 -->
       <add-dialog ref="refadd" :userList="userList"></add-dialog>
       <!-- 编辑角色对话框 -->
-      <EditDialog ref="editRef"></EditDialog>
+      <EditDialog ref="editRef" :editUserId="editUserId"></EditDialog>
       <AllocateRoleDialog ref="allocateRoleDialogRef"></AllocateRoleDialog>
     </el-card>
   </div>
@@ -106,7 +106,8 @@ export default {
         pagesize: 5
       },
       userList: [],
-      total: 0
+      total: 0,
+      editUserId: 0
     };
   },
   methods: {
@@ -138,12 +139,8 @@ export default {
     addDialogVisble() {
       this.$refs.refadd.dialogVisble = true;
     },
-    async showEditDialog(id) {
-      const { data: res } = await this.$http.get(`users/${id}`);
-      if (res.meta.status !== 200) return this.$message.error("查询用户信息失败!");
-
-      this.$refs.editRef.editForm = res.data;
-      this.$refs.editRef.dialogVisible = true;
+    setEditUserId(id) {
+      this.editUserId = id;
     },
     showAllocateRoleDialog(role) {
       this.$refs.allocateRoleDialogRef.showAllocateRoleDialog(role);

@@ -7,6 +7,7 @@ import "./plugins/element.js";
 import "./assets/css/reset.css";
 import "./assets/css/global.css";
 import "element-ui/lib/theme-chalk/index.css";
+import TreeTable from "vue-table-with-tree-grid";
 /* axios.create({
   baseURL: "http://timemeetyou.com:8889/api/private/v1/",
   // 跨域请求时是否需要使用凭证
@@ -23,6 +24,8 @@ import "element-ui/lib/theme-chalk/index.css";
     }
   }
 }); */
+
+// axios.defaults.baseURL = "http://timemeetyou.com:8889/api/private/v1/";
 axios.defaults.baseURL = "https://www.liulongbin.top:8888/api/private/v1/";
 axios.interceptors.request.use((config) => {
   config.headers.Authorization = window.sessionStorage.getItem("token");
@@ -31,8 +34,10 @@ axios.interceptors.request.use((config) => {
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
+Vue.component("tree-table", TreeTable);
+
 // 自定义格式化时间的全局过滤器
-Vue.filter("dateFormat", function(originVal) {
+Vue.filter("dateFormat", function (originVal) {
   const dt = new Date(originVal);
 
   const y = dt.getFullYear();
