@@ -14,6 +14,7 @@ const Roles = () =>
   import(/* webpackChunkName: "Users_Rights_Roles" */ "../components/right/Roles.vue");
 // 商品种类页面
 const CagePage = () => import(/* webpackChunkName: "Cate" */ "@v/goods/CatePage.vue");
+const ParamsPage = () => import(/* webpackChunkName: "Params" */ "@v/goods/ParamsPage.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -46,6 +47,10 @@ const routes = [
       {
         path: "/categories",
         component: CagePage
+      },
+      {
+        path: "/params",
+        component: ParamsPage
       }
     ]
   }
