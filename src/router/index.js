@@ -22,6 +22,8 @@ const GoodsListPage = () => import(/* webpackChunkName: "List" */ "@v/goods/Good
 const AddGoodPage = () => import(/* webpackChunkName: "List" */ "@v/goods/AddGoodPage.vue");
 
 const OrderPage = () => import(/* webpackChunkName: "Order" */ "@v/order/OrderPage.vue");
+const ReportPage = () => import(/* webpackChunkName: "Report" */ "@v/ReportPage.vue");
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -71,6 +73,10 @@ const routes = [
       {
         path: "/orders",
         component: OrderPage
+      },
+      {
+        path: "/reports",
+        component: ReportPage
       }
     ]
   }
