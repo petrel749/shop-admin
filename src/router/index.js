@@ -12,11 +12,16 @@ const Rights = () =>
   import(/* webpackChunkName: "Users_Rights_Roles" */ "../components/right/Rights.vue");
 const Roles = () =>
   import(/* webpackChunkName: "Users_Rights_Roles" */ "../components/right/Roles.vue");
+
 // 商品种类页面
 const CagePage = () => import(/* webpackChunkName: "Cate" */ "@v/goods/CatePage.vue");
+
 const ParamsPage = () => import(/* webpackChunkName: "Params" */ "@v/goods/ParamsPage.vue");
+
 const GoodsListPage = () => import(/* webpackChunkName: "List" */ "@v/goods/GoodsListPage.vue");
 const AddGoodPage = () => import(/* webpackChunkName: "List" */ "@v/goods/AddGoodPage.vue");
+
+const OrderPage = () => import(/* webpackChunkName: "Order" */ "@v/order/OrderPage.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -62,6 +67,10 @@ const routes = [
       {
         path: "/goods/add",
         component: AddGoodPage
+      },
+      {
+        path: "/orders",
+        component: OrderPage
       }
     ]
   }
